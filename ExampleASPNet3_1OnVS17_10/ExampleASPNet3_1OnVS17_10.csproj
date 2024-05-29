@@ -4,6 +4,12 @@
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <UserSecretsId>19f4789c-6a69-43e2-a92e-71b0ce113891</UserSecretsId>
     <DockerDefaultTargetOS>Linux</DockerDefaultTargetOS>
+    <!-- Need to explictly set base as the stage for fast mode, as it's not the first stage -->
+    <DockerfileFastModeStage>base</DockerfileFastModeStage>
+  </PropertyGroup>
+  <!-- When building in VS set a build arg to include the 6.0 runtime -->
+  <PropertyGroup Condition="'$(BuildingInsideVisualStudio)' == 'true'">
+    <DockerfileBuildArguments>--build-arg MY_LAUNCHING_FROM_VS=true</DockerfileBuildArguments>
   </PropertyGroup>
 
   <ItemGroup>
